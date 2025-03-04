@@ -9,31 +9,9 @@ trigger:
 pool:
   name: 'Linux'
 
-strategy:
-  matrix:
-    Python38:
-      python.version: '3.8'
-    Python39:
-      python.version: '3.9'
-    Python310:
-      python.version: '3.10'
-    Python311:
-      python.version: '3.11'
-
 steps:
-- task: UsePythonVersion@0
-  inputs:
-    versionSpec: '$(python.version)'
-    disableDownloadFromRegistry: true
-  displayName: 'Use Python $(python.version)'
-
 - script: |
-    sudo apt-get update
-    sudo apt-get install -y python3.8 python3.9 python3.10 python3.11
-  displayName: 'Install Python Versions'
-
-- script: |
-    python -m pip install --upgrade pip
+    python3 -m pip install --upgrade pip
     pip install -r requirements.txt
   displayName: 'Install dependencies'
 
