@@ -24,7 +24,13 @@ steps:
 - task: UsePythonVersion@0
   inputs:
     versionSpec: '$(python.version)'
+    disableDownloadFromRegistry: true
   displayName: 'Use Python $(python.version)'
+
+- script: |
+    sudo apt-get update
+    sudo apt-get install -y python3.8 python3.9 python3.10 python3.11
+  displayName: 'Install Python Versions'
 
 - script: |
     python -m pip install --upgrade pip
